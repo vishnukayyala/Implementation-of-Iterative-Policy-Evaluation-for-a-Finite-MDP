@@ -214,7 +214,11 @@ env.close()
 
 ## Output
 
-```text
+```
+
+when gamma is 0.9
+
+
 Number of Iterations: 49
 
 State-Value Function as 4x4 Grid:
@@ -223,6 +227,18 @@ State-Value Function as 4x4 Grid:
  [0.0067 0.0000 0.0263 0.0000]
  [0.0187 0.0576 0.1070 0.0000]
  [0.0000 0.1304 0.3915 0.0000]]
+
+when gamma is 0.99
+
+Number of Iterations: 71
+
+State-Value Function as 4x4 Grid:
+[[0.0124 0.0104 0.0193 0.0095]
+ [0.0148 0.     0.0389 0.    ]
+ [0.0326 0.0843 0.1378 0.    ]
+ [0.     0.1703 0.4336 0.    ]]
+
+
 ```
 
 The output displays the number of iterations required for convergence and the estimated state-value function for all 16 states.
