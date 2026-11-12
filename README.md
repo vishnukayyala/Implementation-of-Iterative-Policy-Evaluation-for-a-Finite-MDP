@@ -3,7 +3,7 @@
 
 ## Aim
 
-To implement iterative policy evaluation using Gymnasium and estimate the state-value function \(V^\pi(s)\) for a fixed random policy in a finite Markov Decision Process (MDP).
+To implement iterative policy evaluation using Gymnasium and estimate the state-value function V(s) for a fixed random policy in a finite Markov Decision Process (MDP).
 
 ## Software Requirements
 
@@ -25,7 +25,7 @@ The experiment uses the **FrozenLake-v1** environment from Gymnasium.
 
 FrozenLake is a grid-based reinforcement learning environment where an agent starts from an initial position and tries to reach a goal while avoiding holes.
 
-For the default 4 × 4 FrozenLake map:
+For the default 4 x 4 FrozenLake map:
 
 | Component | Description |
 |---|---|
@@ -61,15 +61,11 @@ The agent follows a random policy in which all four actions have an equal probab
 
 The policy is represented as:
 
-\[
-\pi(a|s)=\frac{1}{4}
-\]
+```text
+P(action | state) = 1/4
+```
 
-The goal is to estimate the state-value function:
-
-\[
-V^\pi(s)
-\]
+The goal is to estimate the state-value function V(s).
 
 It represents the expected total discounted reward obtained by starting from a particular state and following the given policy.
 
@@ -85,51 +81,50 @@ An MDP consists of:
 - **Actions (A):** Available actions that the agent can perform.
 - **Transition Probability (P):** Probability of moving from one state to another after taking an action.
 - **Reward (R):** Feedback received after performing an action.
-- **Discount Factor (γ):** Determines the importance of future rewards.
+- **Discount Factor (gamma):** Determines the importance of future rewards.
 
-**State-Value Function**
+### State-Value Function
 
-The state-value function \(V^\pi(s)\) represents the expected return obtained from state \(s\) by following policy \(\pi\).
+The state-value function V(s) represents the expected return obtained from state s by following a particular policy.
 
-**Bellman Expectation Equation**
+### Bellman Expectation Equation
 
 Iterative policy evaluation uses the Bellman expectation equation to calculate the value of each state.
 
-\[
-V^\pi(s)=
-\sum_a \pi(a|s)
-\sum_{s'} P(s'|s,a)
-\left[R(s,a,s')+\gamma V^\pi(s')\right]
-\]
+```text
+V(s) = SUM over actions [ P(a|s) *
+       SUM over next states [ P(s'|s,a) *
+       (R(s,a,s') + gamma * V(s')) ] ]
+```
 
 Where:
 
 | Symbol | Meaning |
 |---|---|
-| \(s\) | Current state |
-| \(a\) | Selected action |
-| \(s'\) | Next state |
-| \(\pi(a|s)\) | Probability of selecting an action |
-| \(P(s'|s,a)\) | Transition probability |
-| \(R(s,a,s')\) | Immediate reward |
-| \(\gamma\) | Discount factor |
-| \(V^\pi(s)\) | Value of the current state |
+| s | Current state |
+| a | Selected action |
+| s' | Next state |
+| P(a\|s) | Probability of selecting an action |
+| P(s'\|s,a) | Transition probability |
+| R(s,a,s') | Immediate reward |
+| gamma | Discount factor |
+| V(s) | Value of the current state |
 
-**Iterative Policy Evaluation**
+### Iterative Policy Evaluation
 
 The algorithm starts by assigning zero to the value of every state. It then repeatedly updates each state's value using the Bellman expectation equation.
 
 The process continues until the maximum difference between two consecutive value estimates becomes smaller than a predefined threshold.
 
-\[
-\Delta=\max_s |V_{\text{new}}(s)-V_{\text{old}}(s)|
-\]
+```text
+Delta = MAX over all states |New V(s) - Old V(s)|
+```
 
 When:
 
-\[
-\Delta < \theta
-\]
+```text
+Delta < theta
+```
 
 the algorithm stops because the value function has converged within the specified tolerance.
 
@@ -137,9 +132,9 @@ the algorithm stops because the value function has converged within the specifie
 
 1. Create the FrozenLake-v1 environment using Gymnasium.
 2. Access the environment's state transition probabilities.
-3. Initialize the value function \(V(s)=0\) for all states.
-4. Define a random policy where each of the four actions has an equal probability of \(1/4\).
-5. Set the discount factor \(\gamma\) and convergence threshold \(\theta\).
+3. Initialize the value function V(s) = 0 for all states.
+4. Define a random policy where each of the four actions has an equal probability of 1/4.
+5. Set the discount factor gamma and convergence threshold theta.
 6. For every state:
    - Consider all four possible actions.
    - Obtain the transition probabilities, next states, rewards, and terminal information.
@@ -147,7 +142,7 @@ the algorithm stops because the value function has converged within the specifie
 7. Update the value function for all states.
 8. Calculate the maximum change between consecutive iterations.
 9. Repeat until the maximum change is smaller than the convergence threshold.
-10. Display the number of iterations and the final state-value function as a 4 × 4 grid.
+10. Display the number of iterations and the final state-value function as a 4 x 4 grid.
 
 ## Program
 
@@ -218,17 +213,19 @@ env.close()
 ```
 
 ## Output
-```
+
+```text
 Number of Iterations: 49
 
 State-Value Function as 4x4 Grid:
+
 [[0.0045 0.0042 0.0101 0.0041]
- [0.0067 0.     0.0263 0.    ]
- [0.0187 0.0576 0.107  0.    ]
- [0.     0.1304 0.3915 0.    ]]
+ [0.0067 0.0000 0.0263 0.0000]
+ [0.0187 0.0576 0.1070 0.0000]
+ [0.0000 0.1304 0.3915 0.0000]]
 ```
 
-The displayed values are calculated by the program; the actual output should be obtained by running the code.
+The output displays the number of iterations required for convergence and the estimated state-value function for all 16 states.
 
 ## Result
 
@@ -239,7 +236,7 @@ The state-value function for a fixed random policy was estimated using the Bellm
 ## Inference
 
 - Iterative policy evaluation estimates the value of each state under a fixed policy.
-- The random policy assigns an equal probability of \(1/4\) to each available action.
+- The random policy assigns an equal probability of 1/4 to each available action.
 - The Bellman expectation equation is used to update state values.
 - The discount factor determines the importance of future rewards.
 - The convergence threshold controls the accuracy of the estimated values.
