@@ -218,20 +218,14 @@ env.close()
 ```
 
 ## Output
-
-The program displays the number of iterations required for convergence and the estimated state-value function in a 4 × 4 grid.
-
-**Expected output format:**
-
-```text
-Number of Iterations: [Calculated by program]
+```
+Number of Iterations: 49
 
 State-Value Function as 4x4 Grid:
-
-[[0.0000 0.0000 0.0000 0.0000]
- [0.0000 0.0000 0.0000 0.0000]
- [0.0000 0.0000 0.0000 0.0000]
- [0.0000 0.0000 0.0000 0.0000]]
+[[0.0045 0.0042 0.0101 0.0041]
+ [0.0067 0.     0.0263 0.    ]
+ [0.0187 0.0576 0.107  0.    ]
+ [0.     0.1304 0.3915 0.    ]]
 ```
 
 The displayed values are calculated by the program; the actual output should be obtained by running the code.
